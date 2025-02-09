@@ -2,14 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, doc, getDoc, query, where } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA_MtmG-FxYDswyWnlOIIEd9GzjvEwcoqM",
-  authDomain: "vanlife-scrimba-d070a.firebaseapp.com",
-  projectId: "vanlife-scrimba-d070a",
-  storageBucket: "vanlife-scrimba-d070a.firebasestorage.app",
-  messagingSenderId: "495751074754",
-  appId: "1:495751074754:web:ddafdd326e8fe3080bfc5b"
+  apiKey: import.meta.env.VITE_FIRESTORE_API_KEY,
+  authDomain: import.meta.env.VITE_FIRESTORE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIRESTORE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIRESTORE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIRESTORE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIRESTORE_APP_ID
 };
-
+console.log(firebaseConfig)
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const vansRef = collection(db, "vans");
