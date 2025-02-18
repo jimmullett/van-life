@@ -1,11 +1,18 @@
-import React from "react"
+import React from 'react';
 
-export default function Income() {
-    const transactionsData = [
-        { amount: 720, date: "Jan 3, '23", id: "1" },
-        { amount: 560, date: "Dec 12, '22", id: "2" },
-        { amount: 980, date: "Dec 3, '22", id: "3" },
-    ]
+interface Transaction {
+    amount: number;
+    date: string;
+    id: string;
+}
+
+const Income: React.FC = (): JSX.Element => {
+    const transactionsData: Transaction[] = [
+        { amount: 720, date: 'Jan 3, \'23', id: '1' },
+        { amount: 560, date: 'Dec 12, \'22', id: '2' },
+        { amount: 980, date: 'Dec 3, \'22', id: '3' },
+    ];
+
     return (
         <section className="host-income">
             <h1>Income</h1>
@@ -33,5 +40,7 @@ export default function Income() {
                 ))}
             </div>
         </section>
-    )
-}
+    );
+};
+
+export default Income; 

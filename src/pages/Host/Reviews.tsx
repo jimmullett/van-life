@@ -1,8 +1,16 @@
-import React from "react"
-import { BsStarFill } from "react-icons/bs"
+import React from 'react';
+import { BsStarFill } from 'react-icons/bs';
 
-export default function Reviews() {
-    const reviewsData = [
+interface Review {
+    rating: number;
+    name: string;
+    date: string;
+    text: string;
+    id: string;
+}
+
+const Reviews: React.FC = (): JSX.Element => {
+    const reviewsData: Review[] = [
         {
             rating: 5,
             name: "Elliot",
@@ -17,7 +25,7 @@ export default function Reviews() {
             text: "This is our third time using the Modest Explorer for our travels and we love it! No complaints, absolutely perfect!",
             id: "2",
         },
-    ]
+    ];
     
     return (
         <section className="host-reviews">
@@ -49,5 +57,7 @@ export default function Reviews() {
                 </div>
             ))}
         </section>
-    )
-}
+    );
+};
+
+export default Reviews; 

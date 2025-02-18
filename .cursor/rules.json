@@ -1,0 +1,56 @@
+{
+  "name": "React Project Rules",
+  "version": "1.0.0",
+  "description": "Rules for linting and code style in a React/TypeScript project.",
+  "rules": {
+    "typescript": {
+      "rules": {
+        "no-unused-vars": "warn",
+        "no-console": "warn",
+        "@typescript-eslint/explicit-function-return-type": "warn",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/explicit-module-boundary-types": "warn"
+      }
+    },
+    "react": {
+      "rules": {
+        "react/jsx-props-no-spreading": "warn",
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off"
+      }
+    },
+    "eslint": {
+      "rules": {
+        "semi": ["warn", "always"],
+        "quotes": ["warn", "single"],
+        "indent": ["warn", 2],
+        "no-unused-vars": "off"
+      }
+    },
+    "import": {
+      "rules": {
+        "import/order": "warn"
+      }
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {
+          "alwaysTryTypes": true,
+          "project": "./tsconfig.json"
+      }
+    }
+  },
+  "ignoreFiles": [
+    "node_modules/**",
+    "dist/**",
+    "build/**",
+    "*.config.js"
+  ]
+}

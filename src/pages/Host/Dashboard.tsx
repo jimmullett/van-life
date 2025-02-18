@@ -1,21 +1,34 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { BsStarFill } from "react-icons/bs"
-import { getHostVans } from "../../api"
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { BsStarFill } from 'react-icons/bs';
+import { getHostVans } from '../../api';
+import type { Van, VanFromAPI } from '../../types/van';
+import { assertVanType } from '../../types/van';
 
-export default function Dashboard() {
-    const [vans, setVans] = React.useState([])
-    const [loading, setLoading] = React.useState(false)
-    const [error, setError] = React.useState(null)
-    React.useEffect(() => {
-        setLoading(true)
+interface DashboardError {
+    message: string;
+}
+
+const Dashboard: React.FC = (): JSX.Element => {
+    const [vans, setVans] = useState<Van[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<DashboardError | null>(null);
+
+    useEffect(() => {
+        setLoading(true);
         getHostVans()
-            .then(data => setVans(data))
+            .then((data: VanFromAPI[]) => {
+                const validatedVans = data.map(van => {
+                    assertVanType(van.type);
+                    return van as Van;
+                });
+                setVans(validatedVans);
+            })
             .catch(err => setError(err))
-            .finally(() => setLoading(false))
-    }, [])
+            .finally(() => setLoading(false));
+    }, []);
 
-    function renderVanElements(vans) {
+    const renderVanElements = (vans: Van[]): JSX.Element => {
         const hostVansEls = vans.map((van) => (
             <div className="host-van-single" key={van.id}>
                 <img src={van.imageUrl} alt={`Photo of ${van.name}`} />
@@ -25,21 +38,17 @@ export default function Dashboard() {
                 </div>
                 <Link to={`vans/${van.id}`}>View</Link>
             </div>
-        ))
+        ));
 
         return (
             <div className="host-vans-list">
                 <section>{hostVansEls}</section>
             </div>
-        )
-    }
-
-    // if (loading) {
-    //     return <h1>Loading...</h1>
-    // }
+        );
+    };
 
     if (error) {
-        return <h1>Error: {error.message}</h1>
+        return <h1>Error: {error.message}</h1>;
     }
 
     return (
@@ -54,9 +63,7 @@ export default function Dashboard() {
             </section>
             <section className="host-dashboard-reviews">
                 <h2>Review score</h2>
-
                 <BsStarFill className="star" />
-
                 <p>
                     <span>5.0</span>/5
                 </p>
@@ -67,19 +74,14 @@ export default function Dashboard() {
                     <h2>Your listed vans</h2>
                     <Link to="vans">View all</Link>
                 </div>
-                {
-                    loading && !vans
-                    ? <h1>Loading...</h1>
-                    : (
-                        <>
-                            {renderVanElements(vans)}
-                        </>
-                    )
-                }
-                {/*<React.Suspense fallback={<h3>Loading...</h3>}>
-                    <Await resolve={loaderData.vans}>{renderVanElements}</Await>
-                </React.Suspense>*/}
+                {loading && !vans.length ? (
+                    <h1>Loading...</h1>
+                ) : (
+                    renderVanElements(vans)
+                )}
             </section>
         </>
-    )
-}
+    );
+};
+
+export default Dashboard; 
