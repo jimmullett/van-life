@@ -1,5 +1,7 @@
 import React from 'react';
+import type { JSX } from 'react';
 import { Outlet, Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../lib/firebase';
 
 interface LocationState {
     message: string;
@@ -7,10 +9,14 @@ interface LocationState {
 }
 
 const AuthRequired: React.FC = (): JSX.Element => {
-    const isLoggedIn = localStorage.getItem("loggedin");
+    const { user, loading } = useAuth();
     const location = useLocation();
     
-    if (!isLoggedIn) {
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    
+    if (!user) {
         const state: LocationState = {
             message: "You must log in first",
             from: location.pathname

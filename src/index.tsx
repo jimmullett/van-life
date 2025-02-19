@@ -1,4 +1,5 @@
 import React from 'react';
+import type { JSX } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ import Layout from './components/Layout';
 import HostLayout from './components/HostLayout';
 import AuthRequired from './components/AuthRequired';
 
-import './server';
+// import './server';
 
 const App: React.FC = (): JSX.Element => {
   return (

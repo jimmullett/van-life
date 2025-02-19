@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+---
+
+# Your rule content
+[.env](mdc:.env)
+Never overwrite or modify existing values in .env files unless explicitly requested by the user. These files contain sensitive configuration data that should be preserved. If showing an example .env structure, use a separate .env.example file instead.

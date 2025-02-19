@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
+import type { JSX } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { loginUser } from '../api';
+import { loginWithEmailAndPassword } from '../lib/firebase';
 
 interface LoginFormData {
     email: string;
@@ -12,14 +13,10 @@ interface LocationState {
     from?: string;
 }
 
-interface LoginError {
-    message: string;
-}
-
 const Login: React.FC = (): JSX.Element => {
     const [loginFormData, setLoginFormData] = useState<LoginFormData>({ email: '', password: '' });
     const [status, setStatus] = useState<'idle' | 'submitting'>('idle');
-    const [error, setError] = useState<LoginError | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -30,12 +27,11 @@ const Login: React.FC = (): JSX.Element => {
         e.preventDefault();
         setStatus('submitting');
         try {
-            await loginUser(loginFormData);
+            await loginWithEmailAndPassword(loginFormData.email, loginFormData.password);
             setError(null);
-            localStorage.setItem('loggedin', 'true');
             navigate(from, { replace: true });
         } catch (err) {
-            setError(err as LoginError);
+            setError((err as Error).message);
         } finally {
             setStatus('idle');
         }
@@ -55,8 +51,8 @@ const Login: React.FC = (): JSX.Element => {
                 <h3 className="login-error">{state.message}</h3>
             )}
             <h1>Sign in to your account</h1>
-            {error?.message && (
-                <h3 className="login-error">{error.message}</h3>
+            {error && (
+                <h3 className="login-error">{error}</h3>
             )}
 
             <form onSubmit={handleSubmit} className="login-form">
