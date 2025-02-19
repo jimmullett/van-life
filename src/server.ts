@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////
+//
+// This is code for the miragejs server that was used in the tutorial
+// It is not used in the current project
+//
+///////////////////////////////////
+
+
 // import { createServer, Model, Response, Registry, Server } from 'miragejs';
 // import { ModelDefinition } from 'miragejs/-types';
 // import Schema from 'miragejs/orm/schema';
@@ -5,12 +13,12 @@
 
 // Define the shape of our models
 // interface VanModel extends Van {}
-interface UserModel {
-    id: string;
-    email: string;
-    password?: string;
-    name: string;
-}
+// interface UserModel {
+//     id: string;
+//     email: string;
+//     password?: string;
+//     name: string;
+// }
 
 // Define our Registry and Schema types
 // type AppRegistry = Registry<
