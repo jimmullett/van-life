@@ -1,4 +1,4 @@
-import React, { useState, useEffect, CSSProperties } from 'react';
+import React, { useState, useEffect, CSSProperties, type JSX } from 'react';
 import { useParams, Link, NavLink, Outlet } from 'react-router-dom';
 import { getVan } from '../../api';
 import type { Van, VanFromAPI } from '../../types/van';

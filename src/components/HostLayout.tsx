@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, type JSX } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const HostLayout: React.FC = (): JSX.Element => {

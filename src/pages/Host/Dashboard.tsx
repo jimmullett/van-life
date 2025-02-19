@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, type JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { BsStarFill } from 'react-icons/bs';
 import { getHostVans } from '../../api';

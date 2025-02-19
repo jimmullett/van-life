@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type JSX } from 'react';
 import { Link } from 'react-router-dom';
 import bgImg from '../assets/images/about-hero.png';
 

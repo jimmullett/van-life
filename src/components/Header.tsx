@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, type JSX } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import imageUrl from '/src/assets/images/avatar-icon.png';
 

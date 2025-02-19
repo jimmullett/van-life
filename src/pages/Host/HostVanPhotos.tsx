@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type JSX } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import type { Van } from '../../types/van';
 
